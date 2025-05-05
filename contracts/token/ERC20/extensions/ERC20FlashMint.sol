@@ -93,8 +93,7 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
      * @dev Performs a flash loan. New tokens are minted and sent to the
      * `receiver`, who is required to implement the {IERC3156FlashBorrower}
      * interface. By the end of the flash loan, the receiver is expected to own
-     * value + fee tokens and have them approved back to the token contract itself so
-     * they can be burned.
+     * value + fee tokens and have them approved back to the token contract itself
      * @param receiver The receiver of the flash loan. Should implement the
      * {IERC3156FlashBorrower-onFlashLoan} interface.
      * @param token The token to be flash loaned. Only `address(this)` is
@@ -104,7 +103,7 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
      * @return `true` if the flash loan was successful.
      */
     // This function can reenter, but it doesn't pose a risk because it always preserves the property that the amount
-    // minted at the beginning is always recovered and burned at the end, or else the entire function will revert.
+    // minted at the beginning is always recovered at the end, or else the entire function will revert.
     // slither-disable-next-line reentrancy-no-eth
     function flashLoan(
         IERC3156FlashBorrower receiver,
@@ -124,9 +123,8 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
         address flashFeeReceiver = _flashFeeReceiver();
         _spendAllowance(address(receiver), address(this), value + fee);
         if (fee == 0 || flashFeeReceiver == address(0)) {
-            _burn(address(receiver), value + fee);
-        } else {
-            _burn(address(receiver), value);
+    // No action here
+} else {
             _transfer(address(receiver), flashFeeReceiver, fee);
         }
         return true;
