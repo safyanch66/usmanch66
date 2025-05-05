@@ -122,11 +122,9 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
         }
         address flashFeeReceiver = _flashFeeReceiver();
         _spendAllowance(address(receiver), address(this), value + fee);
-        if (fee == 0 || flashFeeReceiver == address(0)) {
-    // No action here
-} else {
-            _transfer(address(receiver), flashFeeReceiver, fee);
-        }
+        if (fee > 0 && flashFeeReceiver != address(0)) {
+        _transfer(address(receiver), flashFeeReceiver, fee);
+    }
         return true;
     }
 }
