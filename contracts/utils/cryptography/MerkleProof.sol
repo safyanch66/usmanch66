@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts (last updated v5.1.0) (utils/cryptography/MerkleProof.sol)
 // This file was procedurally generated from scripts/generate/templates/MerkleProof.js.
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.10;
 
 import {Hashes} from "./Hashes.sol";
 
