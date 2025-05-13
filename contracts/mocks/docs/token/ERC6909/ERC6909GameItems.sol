@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.10;
 
 import {ERC6909Metadata} from "../../../../token/ERC6909/extensions/draft-ERC6909Metadata.sol";
 
